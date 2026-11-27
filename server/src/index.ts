@@ -49,7 +49,7 @@ app.post('/api/seed', (_q, r) => { db.seed(); r.json({ ok: true }); });
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pdfjs = require('pdfjs-dist/legacy/build/pdf.js');
 async function readPdf(buf: Buffer): Promise<string> {
-  const doc = await pdfjs.getDocument({ data: new Uint8Array(buf), useSystemFonts: true }).promise;
+   const doc = await pdfjs.getDocument({ data: new Uint8Array(buf), useSystemFonts: true, isEvalSupported: false }).promise;
   let out = '';
   for (let i = 1; i <= doc.numPages; i++) {
     const { items } = await (await doc.getPage(i)).getTextContent();
